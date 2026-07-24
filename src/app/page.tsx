@@ -1,30 +1,34 @@
-import { ArrowUpRight, Check } from "lucide-react";
+import { ArrowDownRight, ArrowUpRight, Check, MoveUpRight } from "lucide-react";
 import { HeroField } from "@/components/hero-field";
 import { Navigation } from "@/components/navigation";
+import { Reveal } from "@/components/reveal";
 
-const pillars = [
+const layers = [
   {
-    number: "01",
-    title: "Perceive",
-    body: "World models grounded in what machines can actually see, touch, and measure.",
+    code: "01",
+    title: "Capture",
+    body: "Consented, multi-sensor observations of real work, movement, and environment.",
+    detail: "Video / audio / motion / context",
   },
   {
-    number: "02",
-    title: "Reason",
-    body: "Learning systems that turn messy physical context into useful decisions.",
+    code: "02",
+    title: "Curate",
+    body: "Quality systems that turn raw physical experience into trustworthy training data.",
+    detail: "Metadata / QA / provenance",
   },
   {
-    number: "03",
-    title: "Act",
-    body: "Reliable robotic behaviour that creates leverage in the places people need it most.",
+    code: "03",
+    title: "Compound",
+    body: "A growing intelligence asset for models that need to reason before they act.",
+    detail: "Evaluation / learning / insight",
   },
 ];
 
-const practices = [
-  "Embodied AI research",
-  "Robotics data systems",
-  "Simulation and evaluation",
-  "Human-centered deployment",
+const standards = [
+  "Clear contributor consent and data governance",
+  "Multimodal context, not isolated annotations",
+  "Traceable provenance from capture to training",
+  "Quality evaluation that improves with every collection",
 ];
 
 export default function Home() {
@@ -33,119 +37,107 @@ export default function Home() {
       <Navigation />
 
       <section className="hero" id="top" aria-labelledby="hero-title">
+        <HeroField />
         <div className="page-shell hero-layout">
           <div className="hero-copy">
-            <p className="eyebrow reveal">Kinemor / Physical intelligence</p>
-            <h1 className="hero-title reveal reveal-delay-1" id="hero-title">
-              Intelligence for the world that moves.
+            <p className="eyebrow hero-reveal">KINEMOR / INFRASTRUCTURE FOR PHYSICAL AI</p>
+            <h1 className="hero-title hero-reveal hero-reveal-delay-1" id="hero-title">
+              Data that teaches machines the real world.
             </h1>
-            <p className="hero-lede reveal reveal-delay-2">
-              Kinemor is building embodied AI systems that help machines
-              understand, learn, and work in the physical world.
+            <p className="hero-lede hero-reveal hero-reveal-delay-2">
+              Kinemor builds the multimodal data infrastructure behind embodied intelligence: real environments, real movement, and the context models need to act with care.
             </p>
-            <div className="hero-actions reveal reveal-delay-3">
-              <a className="button button-primary" href="#thesis">
-                Enter the thesis <ArrowUpRight aria-hidden="true" size={18} />
+            <div className="hero-actions hero-reveal hero-reveal-delay-3">
+              <a className="button button-primary" href="#system">
+                Explore the system <ArrowDownRight aria-hidden="true" size={18} />
               </a>
               <a className="text-link" href="#contact">
                 Work with us <ArrowUpRight aria-hidden="true" size={17} />
               </a>
             </div>
           </div>
-          <HeroField />
         </div>
-        <div className="hero-index" aria-label="Core focus areas">
-          <div>
-            <span>01</span> Perception
-          </div>
-          <div>
-            <span>02</span> Learning
-          </div>
-          <div>
-            <span>03</span> Action
-          </div>
+        <div className="hero-index page-shell" aria-label="Kinemor data system">
+          <div><span>01</span> Capture signal</div>
+          <div><span>02</span> Build context</div>
+          <div><span>03</span> Train action</div>
         </div>
       </section>
 
-      <section className="thesis section" id="thesis" aria-labelledby="thesis-title">
-        <div className="page-shell thesis-grid">
-          <div>
-            <p className="eyebrow ink-eyebrow">Our thesis</p>
+      <section className="manifesto section" id="thesis" aria-labelledby="thesis-title">
+        <div className="page-shell manifesto-grid">
+          <Reveal>
+            <p className="eyebrow ink-eyebrow">THE KINEMOR THESIS</p>
+          </Reveal>
+          <Reveal delay={80}>
             <h2 className="section-title" id="thesis-title">
-              Machines should take on physical work. People should have more
-              room to create.
+              Physical intelligence is not scraped. It is earned in the world.
             </h2>
-          </div>
-          <div className="thesis-copy">
+          </Reveal>
+          <Reveal className="manifesto-copy" delay={160}>
             <p>
-              The next generation of useful AI will not live only behind a
-              screen. It will understand environments, adapt to uncertainty,
-              and operate alongside people.
+              The most capable robots will need more than visual labels. They will need rich, accountable records of people, places, objects, motion, sound, and consequence.
             </p>
             <p>
-              We are developing the intelligence, data, and systems needed to
-              make that future dependable.
+              Kinemor makes that evidence usable for the teams building the next generation of machines.
             </p>
-          </div>
+          </Reveal>
         </div>
       </section>
 
-      <section className="systems section" id="systems" aria-labelledby="systems-title">
+      <section className="system section" id="system" aria-labelledby="system-title">
         <div className="page-shell">
-          <div className="section-heading">
-            <p className="eyebrow">A complete physical AI stack</p>
-            <h2 className="section-title" id="systems-title">
-              Built from perception to performance.
-            </h2>
-          </div>
-          <div className="pillar-grid">
-            {pillars.map((pillar) => (
-              <article className="pillar" key={pillar.number}>
-                <div className="pillar-topline">
-                  <span>{pillar.number}</span>
-                  <span className="pillar-rule" />
-                </div>
-                <h3>{pillar.title}</h3>
-                <p>{pillar.body}</p>
-                <ArrowUpRight aria-hidden="true" className="pillar-arrow" size={22} />
-              </article>
+          <Reveal className="section-heading">
+            <div>
+              <p className="eyebrow">A DATA SYSTEM, NOT A DATA DROP</p>
+              <h2 className="section-title" id="system-title">From lived experience to model behavior.</h2>
+            </div>
+            <p className="section-aside">Every layer preserves the context that makes physical AI useful.</p>
+          </Reveal>
+          <div className="layer-list">
+            {layers.map((layer, index) => (
+              <Reveal className="layer-row" delay={index * 85} key={layer.code}>
+                <span className="layer-code">{layer.code}</span>
+                <h3>{layer.title}</h3>
+                <p>{layer.body}</p>
+                <span className="layer-detail">{layer.detail}</span>
+                <MoveUpRight aria-hidden="true" className="layer-arrow" size={21} />
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="method section" id="approach" aria-labelledby="method-title">
-        <div className="page-shell method-layout">
-          <div className="method-panel">
-            <p className="eyebrow ink-eyebrow">How we work</p>
-            <h2 className="section-title" id="method-title">
-              Research that earns its place in the real world.
-            </h2>
-            <p className="method-intro">
-              We connect rigorous research with field data, robust systems, and
-              careful deployment. Each layer makes the next one more useful.
+      <section className="proof section" id="approach" aria-labelledby="approach-title">
+        <div className="page-shell proof-grid">
+          <Reveal className="proof-lead">
+            <p className="eyebrow ink-eyebrow">BUILT FOR THE HARD PART</p>
+            <h2 className="section-title" id="approach-title">Data worthy of systems that will work beside people.</h2>
+            <p>
+              Kinemor is designed around the details that determine whether a dataset becomes a durable advantage: quality, consent, context, and operational trust.
             </p>
-          </div>
-          <ul className="practice-list">
-            {practices.map((practice, index) => (
-              <li key={practice}>
-                <span>0{index + 1}</span>
-                <p>{practice}</p>
-                <Check aria-hidden="true" size={19} />
-              </li>
+          </Reveal>
+          <div className="standard-list" role="list">
+            {standards.map((standard, index) => (
+              <Reveal className="standard-item" delay={index * 75} key={standard}>
+                <div role="listitem">
+                  <span>0{index + 1}</span>
+                  <p>{standard}</p>
+                  <Check aria-hidden="true" size={19} />
+                </div>
+              </Reveal>
             ))}
-          </ul>
+          </div>
         </div>
       </section>
 
-      <section className="signal" aria-labelledby="signal-title">
-        <div className="page-shell signal-layout">
-          <p className="signal-kicker">Kinemor / 001</p>
-          <h2 id="signal-title">
-            We are here to make physical intelligence a practical part of human
-            progress.
-          </h2>
-          <a className="button button-light" href="#contact">
+      <section className="invitation" aria-labelledby="invitation-title">
+        <div className="page-shell invitation-layout">
+          <p className="invitation-index">KNR / 001</p>
+          <Reveal>
+            <h2 id="invitation-title">Build the evidence layer for machines that matter.</h2>
+          </Reveal>
+          <a className="button button-dark" href="#contact">
             Start a conversation <ArrowUpRight aria-hidden="true" size={18} />
           </a>
         </div>
@@ -155,20 +147,16 @@ export default function Home() {
         <div className="page-shell footer-layout">
           <div>
             <p className="footer-wordmark">Kinemor</p>
-            <p className="footer-statement">
-              Physical intelligence for the real world.
-            </p>
+            <p className="footer-statement">Infrastructure for physical AI.</p>
           </div>
           <div className="footer-contact">
-            <p className="eyebrow">Contact</p>
-            <a href="mailto:hello@kinemor.com">hello@kinemor.com</a>
-            <p className="footer-note">
-              This address becomes live once Google Workspace is configured.
-            </p>
+            <p className="eyebrow">CONTACT</p>
+            <a href="mailto:vaduvanathan@kinemor.com">vaduvanathan@kinemor.com</a>
+            <p className="footer-note">Partnerships, research, and ambitious problems welcome.</p>
           </div>
           <div className="footer-meta">
-            <p>Built in India. Thinking globally.</p>
-            <p>© {new Date().getFullYear()} Kinemor. All rights reserved.</p>
+            <p>Built in India. Working globally.</p>
+            <p>&copy; {new Date().getFullYear()} Kinemor. All rights reserved.</p>
           </div>
         </div>
       </footer>

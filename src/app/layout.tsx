@@ -13,9 +13,28 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Kinemor | Physical intelligence for the real world",
+  metadataBase: new URL("https://kinemor.com"),
+  title: {
+    default: "Kinemor | Infrastructure for Physical AI",
+    template: "%s | Kinemor",
+  },
   description:
-    "Kinemor is building embodied AI systems that help machines understand, learn, and work in the physical world.",
+    "Kinemor builds the multimodal data infrastructure behind embodied intelligence: real environments, real movement, and the context models need to act with care.",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "Kinemor | Infrastructure for Physical AI",
+    description: "Data that teaches machines the real world.",
+    siteName: "Kinemor",
+    type: "website",
+    url: "https://kinemor.com",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Kinemor | Infrastructure for Physical AI",
+    description: "Data that teaches machines the real world.",
+  },
 };
 
 export default function RootLayout({
