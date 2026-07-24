@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
 const destination = "vaduvanathan@kinemor.com";
-const from = process.env.RESEND_FROM_EMAIL || "Kinemor <hello@kinemor.com>";
+const from = process.env.RESEND_FROM_EMAIL || "Kinemor <hello@send.kinemor.com>";
 
 function asText(value: unknown, limit: number) {
   return typeof value === "string" ? value.trim().slice(0, limit) : "";

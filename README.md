@@ -21,10 +21,10 @@ Production needs these Vercel environment variables:
 
 ```text
 RESEND_API_KEY=re_...
-RESEND_FROM_EMAIL=Kinemor <hello@kinemor.com>
+RESEND_FROM_EMAIL=Kinemor <hello@send.kinemor.com>
 ```
 
-Use Resend to verify `kinemor.com` before setting `RESEND_FROM_EMAIL`. Until the
+Use Resend to verify `send.kinemor.com` before setting `RESEND_FROM_EMAIL`. Until the
 domain is verified, Resend's test sender can only deliver to verified addresses.
 
 ## Checks
