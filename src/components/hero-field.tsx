@@ -163,12 +163,12 @@ export function HeroField() {
     <div className="hero-field" aria-label="Interactive field of linked physical AI observations" role="img">
       <canvas ref={canvasRef} />
       <div className="field-hud field-hud-top" aria-hidden="true">
-        <span>KNR / FIELD_01</span>
-        <span><i /> LIVE CAPTURE</span>
+        <span>KNR / OBSERVATION_01</span>
+        <span><i /> SIGNAL LOCKED</span>
       </div>
       <div className="field-hud field-hud-bottom" aria-hidden="true">
-        <span>VISION + MOTION + AUDIO</span>
-        <span>OBSERVATION / 03</span>
+        <span>VISION / MOTION / AUDIO</span>
+        <span>FRAME / 003</span>
       </div>
     </div>
   );

@@ -6,7 +6,7 @@ import { BrandMark } from "@/components/brand-mark";
 
 const navigationItems = [
   { href: "#thesis", label: "Thesis" },
-  { href: "#systems", label: "Systems" },
+  { href: "#system", label: "System" },
   { href: "#approach", label: "Approach" },
 ];
 

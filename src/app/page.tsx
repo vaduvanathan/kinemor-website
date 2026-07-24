@@ -1,28 +1,8 @@
-import { ArrowDownRight, ArrowUpRight, Check, MoveUpRight } from "lucide-react";
+import { ArrowDownRight, ArrowUpRight, Check } from "lucide-react";
 import { HeroField } from "@/components/hero-field";
 import { Navigation } from "@/components/navigation";
 import { Reveal } from "@/components/reveal";
-
-const layers = [
-  {
-    code: "01",
-    title: "Capture",
-    body: "Consented, multi-sensor observations of real work, movement, and environment.",
-    detail: "Video / audio / motion / context",
-  },
-  {
-    code: "02",
-    title: "Curate",
-    body: "Quality systems that turn raw physical experience into trustworthy training data.",
-    detail: "Metadata / QA / provenance",
-  },
-  {
-    code: "03",
-    title: "Compound",
-    body: "A growing intelligence asset for models that need to reason before they act.",
-    detail: "Evaluation / learning / insight",
-  },
-];
+import { SystemRail } from "@/components/system-rail";
 
 const standards = [
   "Clear contributor consent and data governance",
@@ -40,27 +20,27 @@ export default function Home() {
         <HeroField />
         <div className="page-shell hero-layout">
           <div className="hero-copy">
-            <p className="eyebrow hero-reveal">KINEMOR / INFRASTRUCTURE FOR PHYSICAL AI</p>
+            <p className="eyebrow hero-reveal">KINEMOR / PHYSICAL AI DATA</p>
             <h1 className="hero-title hero-reveal hero-reveal-delay-1" id="hero-title">
-              Data that teaches machines the real world.
+              Teach machines how work gets done.
             </h1>
             <p className="hero-lede hero-reveal hero-reveal-delay-2">
-              Kinemor builds the multimodal data infrastructure behind embodied intelligence: real environments, real movement, and the context models need to act with care.
+              Kinemor turns consented, multimodal observations into the structured evidence teams use to build robots for the real world.
             </p>
             <div className="hero-actions hero-reveal hero-reveal-delay-3">
               <a className="button button-primary" href="#system">
-                Explore the system <ArrowDownRight aria-hidden="true" size={18} />
+                See the system <ArrowDownRight aria-hidden="true" size={18} />
               </a>
-              <a className="text-link" href="#contact">
-                Work with us <ArrowUpRight aria-hidden="true" size={17} />
+              <a className="button button-secondary" href="#contact">
+                Start a data program <ArrowUpRight aria-hidden="true" size={17} />
               </a>
             </div>
           </div>
         </div>
         <div className="hero-index page-shell" aria-label="Kinemor data system">
-          <div><span>01</span> Capture signal</div>
-          <div><span>02</span> Build context</div>
-          <div><span>03</span> Train action</div>
+          <div><span>01</span> Ground truth</div>
+          <div><span>02</span> Structured context</div>
+          <div><span>03</span> Model behavior</div>
         </div>
       </section>
 
@@ -71,12 +51,12 @@ export default function Home() {
           </Reveal>
           <Reveal delay={80}>
             <h2 className="section-title" id="thesis-title">
-              Physical intelligence is not scraped. It is earned in the world.
+              The world is not a dataset until it is captured with care.
             </h2>
           </Reveal>
           <Reveal className="manifesto-copy" delay={160}>
             <p>
-              The most capable robots will need more than visual labels. They will need rich, accountable records of people, places, objects, motion, sound, and consequence.
+              The most capable robots need more than visual labels. They need accountable records of people, places, objects, motion, sound, and consequence.
             </p>
             <p>
               Kinemor makes that evidence usable for the teams building the next generation of machines.
@@ -90,21 +70,11 @@ export default function Home() {
           <Reveal className="section-heading">
             <div>
               <p className="eyebrow">A DATA SYSTEM, NOT A DATA DROP</p>
-              <h2 className="section-title" id="system-title">From lived experience to model behavior.</h2>
+              <h2 className="section-title" id="system-title">Every collection should become a learning system.</h2>
             </div>
-            <p className="section-aside">Every layer preserves the context that makes physical AI useful.</p>
+            <p className="section-aside">Move through the layers. The system keeps the context that makes physical AI useful.</p>
           </Reveal>
-          <div className="layer-list">
-            {layers.map((layer, index) => (
-              <Reveal className="layer-row" delay={index * 85} key={layer.code}>
-                <span className="layer-code">{layer.code}</span>
-                <h3>{layer.title}</h3>
-                <p>{layer.body}</p>
-                <span className="layer-detail">{layer.detail}</span>
-                <MoveUpRight aria-hidden="true" className="layer-arrow" size={21} />
-              </Reveal>
-            ))}
-          </div>
+          <SystemRail />
         </div>
       </section>
 
@@ -135,7 +105,7 @@ export default function Home() {
         <div className="page-shell invitation-layout">
           <p className="invitation-index">KNR / 001</p>
           <Reveal>
-            <h2 id="invitation-title">Build the evidence layer for machines that matter.</h2>
+            <h2 id="invitation-title">Build a world model grounded in the world.</h2>
           </Reveal>
           <a className="button button-dark" href="#contact">
             Start a conversation <ArrowUpRight aria-hidden="true" size={18} />
