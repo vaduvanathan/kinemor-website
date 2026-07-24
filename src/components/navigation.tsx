@@ -5,9 +5,9 @@ import { useState } from "react";
 import { BrandMark } from "@/components/brand-mark";
 
 const navigationItems = [
-  { href: "#thesis", label: "Thesis" },
+  { href: "#what-we-do", label: "What we do" },
   { href: "#system", label: "System" },
-  { href: "#approach", label: "Approach" },
+  { href: "#contact", label: "Contact" },
 ];
 
 export function Navigation() {

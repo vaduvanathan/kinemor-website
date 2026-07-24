@@ -2,6 +2,7 @@ import { ArrowDownRight, ArrowUpRight, Check } from "lucide-react";
 import { HeroField } from "@/components/hero-field";
 import { Navigation } from "@/components/navigation";
 import { Reveal } from "@/components/reveal";
+import { ContactForm } from "@/components/contact-form";
 import { SystemRail } from "@/components/system-rail";
 
 const standards = [
@@ -44,14 +45,14 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="manifesto section" id="thesis" aria-labelledby="thesis-title">
+      <section className="manifesto section" id="what-we-do" aria-labelledby="what-we-do-title">
         <div className="page-shell manifesto-grid">
           <Reveal>
-            <p className="eyebrow ink-eyebrow">THE KINEMOR THESIS</p>
+            <p className="eyebrow ink-eyebrow">WHAT WE DO</p>
           </Reveal>
           <Reveal delay={80}>
-            <h2 className="section-title" id="thesis-title">
-              The world is not a dataset until it is captured with care.
+            <h2 className="section-title" id="what-we-do-title">
+              Capture the reality robots need to learn from.
             </h2>
           </Reveal>
           <Reveal className="manifesto-copy" delay={160}>
@@ -101,19 +102,27 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="invitation" aria-labelledby="invitation-title">
-        <div className="page-shell invitation-layout">
-          <p className="invitation-index">KNR / 001</p>
-          <Reveal>
-            <h2 id="invitation-title">Build a world model grounded in the world.</h2>
+      <section className="contact-section" id="contact" aria-labelledby="contact-title">
+        <div className="page-shell contact-layout">
+          <Reveal className="contact-copy">
+            <p className="eyebrow">CONNECT WITH KINEMOR</p>
+            <h2 id="contact-title">Tell us what you are trying to build.</h2>
+            <p>
+              We are building data programs for teams working on physical intelligence. Tell us where you need real-world evidence, and we will get back to you.
+            </p>
+            <div className="contact-topics" aria-label="Kinemor contact topics">
+              <span>DATA PROGRAMS</span>
+              <span>RESEARCH PARTNERSHIPS</span>
+              <span>CAPTURE OPERATIONS</span>
+            </div>
           </Reveal>
-          <a className="button button-dark" href="#contact">
-            Start a conversation <ArrowUpRight aria-hidden="true" size={18} />
-          </a>
+          <Reveal delay={100}>
+            <ContactForm />
+          </Reveal>
         </div>
       </section>
 
-      <footer className="footer" id="contact">
+      <footer className="footer">
         <div className="page-shell footer-layout">
           <div>
             <p className="footer-wordmark">Kinemor</p>
