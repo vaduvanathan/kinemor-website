@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const destination = "praveenvaduvanathan@gmail.com";
+const destination = "vaduvanathan@kinemor.com";
 const from = process.env.RESEND_FROM_EMAIL || "Kinemor <hello@kinemor.com>";
 
 function asText(value: unknown, limit: number) {
@@ -21,7 +21,7 @@ function escapeHtml(value: string) {
 export async function POST(request: Request) {
   if (!process.env.RESEND_API_KEY) {
     return NextResponse.json(
-      { error: "Contact delivery is being configured. Please email praveenvaduvanathan@gmail.com directly." },
+      { error: "Contact delivery is being configured. Please email vaduvanathan@kinemor.com directly." },
       { status: 503 },
     );
   }

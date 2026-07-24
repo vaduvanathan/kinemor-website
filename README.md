@@ -15,7 +15,7 @@ The site runs at `http://localhost:3000` by default.
 ## Contact delivery
 
 The contact form posts to `/api/contact`. Successful messages are delivered to
-`praveenvaduvanathan@gmail.com` with the sender's email configured as the reply-to address.
+`vaduvanathan@kinemor.com` with the sender's email configured as the reply-to address.
 
 Production needs these Vercel environment variables:
 
