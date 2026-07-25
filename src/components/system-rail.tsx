@@ -76,13 +76,16 @@ export function SystemRail() {
 
       <div className="system-stages">
         {stages.map((stage, index) => (
-          <article
+          <button
+            aria-pressed={activeStage === index}
             className={`system-stage ${activeStage === index ? "is-active" : ""}`}
             data-stage={index}
             key={stage.code}
+            onClick={() => setActiveStage(index)}
             ref={(element) => {
               stageRefs.current[index] = element;
             }}
+            type="button"
           >
             <div className="stage-number">{stage.code}</div>
             <div className="stage-copy">
@@ -91,7 +94,7 @@ export function SystemRail() {
               <p>{stage.body}</p>
             </div>
             <ArrowUpRight aria-hidden="true" className="stage-arrow" size={20} />
-          </article>
+          </button>
         ))}
       </div>
     </div>

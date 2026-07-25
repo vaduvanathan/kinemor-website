@@ -115,6 +115,7 @@ export default function Home() {
               <span>RESEARCH PARTNERSHIPS</span>
               <span>CAPTURE OPERATIONS</span>
             </div>
+            <p className="contact-response-note"><i /> We acknowledge every inquiry by email.</p>
           </Reveal>
           <Reveal delay={100}>
             <ContactForm />
@@ -130,7 +131,7 @@ export default function Home() {
           </div>
           <div className="footer-contact">
             <p className="eyebrow">CONTACT</p>
-            <a href="mailto:vaduvanathan@kinemor.com">vaduvanathan@kinemor.com</a>
+            <a href="mailto:admin@kinemor.com">admin@kinemor.com</a>
             <p className="footer-note">Partnerships, research, and ambitious problems welcome.</p>
           </div>
           <div className="footer-meta">

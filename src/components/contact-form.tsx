@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Check } from "lucide-react";
 import { FormEvent, useState } from "react";
 
 type SubmissionState = "idle" | "sending" | "success" | "error";
@@ -40,6 +40,17 @@ export function ContactForm() {
 
   return (
     <form className="contact-form" onSubmit={submitContact} aria-busy={status === "sending"}>
+      <div className="contact-form-intro">
+        <div>
+          <p className="contact-form-code">KNR / INQUIRY_01</p>
+          <p>Tell us the outcome you need. We will reply to the address you provide.</p>
+        </div>
+        <ol className="contact-form-steps" aria-label="Inquiry process">
+          <li><span>01</span> Receive</li>
+          <li><span>02</span> Review</li>
+          <li><span>03</span> Respond</li>
+        </ol>
+      </div>
       <div className="contact-form-grid">
         <label>
           <span>Name</span>
@@ -47,15 +58,24 @@ export function ContactForm() {
         </label>
         <label>
           <span>Work email</span>
-          <input autoComplete="email" name="email" required type="email" />
+          <input autoComplete="email" name="email" placeholder="you@company.com" required type="email" />
         </label>
         <label>
           <span>Organization</span>
-          <input autoComplete="organization" name="organization" type="text" />
+          <input autoComplete="organization" name="organization" placeholder="Company or lab" type="text" />
+        </label>
+        <label>
+          <span>Inquiry type</span>
+          <select defaultValue="Data program" name="inquiryType">
+            <option value="Data program">Data program</option>
+            <option value="Research partnership">Research partnership</option>
+            <option value="Capture operations">Capture operations</option>
+            <option value="General inquiry">General inquiry</option>
+          </select>
         </label>
         <label className="contact-message-field">
           <span>What are you building?</span>
-          <textarea name="message" required rows={5} />
+          <textarea name="message" placeholder="The physical task, data you need, scale, timing, or the question you want to solve." required rows={5} />
         </label>
         <label className="contact-honeypot" aria-hidden="true">
           <span>Website</span>
@@ -64,8 +84,8 @@ export function ContactForm() {
       </div>
       <div className="contact-form-actions">
         <button className="button button-primary" disabled={status === "sending"} type="submit">
-          {status === "sending" ? "Sending" : "Send inquiry"}
-          <ArrowUpRight aria-hidden="true" size={18} />
+          {status === "sending" ? "Sending" : status === "success" ? "Inquiry received" : "Send inquiry"}
+          {status === "success" ? <Check aria-hidden="true" size={18} /> : <ArrowUpRight aria-hidden="true" size={18} />}
         </button>
         <p aria-live="polite" className={`form-status form-status-${status}`}>
           {message}

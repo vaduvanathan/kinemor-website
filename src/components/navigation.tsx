@@ -1,7 +1,7 @@
 "use client";
 
 import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BrandMark } from "@/components/brand-mark";
 
 const navigationItems = [
@@ -12,13 +12,22 @@ const navigationItems = [
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const updateHeader = () => setIsScrolled(window.scrollY > 18);
+
+    updateHeader();
+    window.addEventListener("scroll", updateHeader, { passive: true });
+    return () => window.removeEventListener("scroll", updateHeader);
+  }, []);
 
   function closeMenu() {
     setIsOpen(false);
   }
 
   return (
-    <header className="site-header">
+    <header className="site-header" data-scrolled={isScrolled}>
       <nav className="page-shell nav-wrap" aria-label="Primary navigation">
         <a className="brand" href="#top" onClick={closeMenu}>
           <BrandMark />

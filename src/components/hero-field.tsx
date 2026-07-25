@@ -10,6 +10,12 @@ type Point = {
   y: number;
 };
 
+type Pointer = {
+  active: boolean;
+  x: number;
+  y: number;
+};
+
 const pointCount = 96;
 
 function makePoints() {
@@ -28,7 +34,7 @@ function drawField(
   height: number,
   points: Point[],
   time: number,
-  pointer: { x: number; y: number },
+  pointer: Pointer,
 ) {
   context.clearRect(0, 0, width, height);
   context.fillStyle = "#171a1a";
@@ -105,6 +111,27 @@ function drawField(
   context.beginPath();
   context.arc(traceX, traceY, 3.2, 0, Math.PI * 2);
   context.fill();
+
+  if (pointer.active) {
+    const pointerX = pointer.x * width;
+    const pointerY = pointer.y * height;
+
+    context.strokeStyle = "rgba(238, 238, 232, 0.16)";
+    context.lineWidth = 1;
+    context.setLineDash([2, 10]);
+    context.beginPath();
+    context.moveTo(pointerX, 0);
+    context.lineTo(pointerX, height);
+    context.moveTo(0, pointerY);
+    context.lineTo(width, pointerY);
+    context.stroke();
+    context.setLineDash([]);
+
+    context.strokeStyle = "rgba(200, 255, 61, 0.72)";
+    context.beginPath();
+    context.arc(pointerX, pointerY, 23 + Math.sin(time * 3) * 2, 0, Math.PI * 2);
+    context.stroke();
+  }
 }
 
 export function HeroField() {
@@ -118,7 +145,7 @@ export function HeroField() {
     if (!context) return undefined;
 
     const points = makePoints();
-    const pointer = { x: 0.52, y: 0.46 };
+    const pointer: Pointer = { active: false, x: 0.52, y: 0.46 };
     const motionReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let animationFrame = 0;
     let start = performance.now();
@@ -141,6 +168,11 @@ export function HeroField() {
       const bounds = canvas.getBoundingClientRect();
       pointer.x = (event.clientX - bounds.left) / bounds.width;
       pointer.y = (event.clientY - bounds.top) / bounds.height;
+      pointer.active = true;
+    };
+
+    const onPointerLeave = () => {
+      pointer.active = false;
     };
 
     const resizeObserver = new ResizeObserver(() => {
@@ -150,12 +182,14 @@ export function HeroField() {
 
     resizeObserver.observe(canvas);
     canvas.addEventListener("pointermove", onPointerMove);
+    canvas.addEventListener("pointerleave", onPointerLeave);
     render(start);
 
     return () => {
       cancelAnimationFrame(animationFrame);
       resizeObserver.disconnect();
       canvas.removeEventListener("pointermove", onPointerMove);
+      canvas.removeEventListener("pointerleave", onPointerLeave);
     };
   }, []);
 
