@@ -4,6 +4,7 @@ const links = [
   { href: "/glove", label: "DGlove1" },
   { href: "/open-worlds", label: "Open Worlds" },
   { href: "/contact", label: "Contact" },
+  { href: "/privacy", label: "Privacy" },
 ];
 
 /** Keeps the same simple routes visible at the end of every Kinemor page. */

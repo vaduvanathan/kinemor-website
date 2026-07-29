@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Azeret_Mono, Space_Grotesk } from "next/font/google";
 import { PageTransition } from "@/components/page-transition";
+import { PrivacyNotice } from "@/components/privacy-notice";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -46,7 +47,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${spaceGrotesk.variable} ${azeretMono.variable}`}>
-      <body><PageTransition>{children}</PageTransition></body>
+      <body>
+        <PageTransition>{children}</PageTransition>
+        <PrivacyNotice />
+      </body>
     </html>
   );
 }
