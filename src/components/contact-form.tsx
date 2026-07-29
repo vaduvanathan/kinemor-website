@@ -61,7 +61,7 @@ export function ContactForm() {
         </label>
         <label>
           <span>Inquiry type</span>
-          <select defaultValue="Data program" name="inquiryType">
+          <select defaultValue="General inquiry" name="inquiryType">
             <option value="Data program">Data program</option>
             <option value="Research partnership">Research partnership</option>
             <option value="Capture operations">Capture operations</option>
