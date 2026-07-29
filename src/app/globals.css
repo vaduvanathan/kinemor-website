@@ -881,6 +881,23 @@ textarea {
   padding: 0 12px;
 }
 
+.contact-form select {
+  appearance: auto;
+  background-color: rgba(7, 8, 7, 0.92);
+  color-scheme: dark;
+  cursor: pointer;
+}
+
+.contact-form select option {
+  background: #070807;
+  color: #f8f7f0;
+}
+
+.contact-form select option:checked {
+  background: #1f2719;
+  color: #b7ff4f;
+}
+
 .contact-form textarea {
   min-height: 126px;
   padding: 12px;

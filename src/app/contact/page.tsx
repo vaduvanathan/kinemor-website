@@ -18,7 +18,7 @@ export default function ContactPage() {
           <Reveal className="contact-copy">
             <p className="eyebrow">CONTACT</p>
             <h1 id="contact-title">Tell us what you want your robot to learn.</h1>
-            <p>Share the task, place, and data you need. Your message goes to contact@kinemor.com, and we will reply to your email.</p>
+            <p>Share the task, place, and data you need. We will review it and reply to the email address you provide.</p>
           </Reveal>
           <Reveal delay={120}><ContactForm /></Reveal>
         </div>
