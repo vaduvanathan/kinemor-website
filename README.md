@@ -22,6 +22,7 @@ Production needs these Vercel environment variables:
 ```text
 RESEND_API_KEY=re_...
 RESEND_FROM_EMAIL=Kinemor <hello@send.kinemor.com>
+CONTACT_TO_EMAIL=contact@kinemor.com
 ```
 
 Use Resend to verify `send.kinemor.com` before setting `RESEND_FROM_EMAIL`. Until the

@@ -1,18 +1,22 @@
 "use client";
 
 import { Menu, X } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { BrandMark } from "@/components/brand-mark";
 
 const navigationItems = [
-  { href: "#what-we-do", label: "What we do" },
-  { href: "#system", label: "System" },
-  { href: "#contact", label: "Contact" },
+  { href: "/", label: "Home" },
+  { href: "/glove", label: "DGlove1" },
+  { href: "/open-worlds", label: "Open Worlds" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const updateHeader = () => setIsScrolled(window.scrollY > 18);
@@ -29,18 +33,15 @@ export function Navigation() {
   return (
     <header className="site-header" data-scrolled={isScrolled}>
       <nav className="page-shell nav-wrap" aria-label="Primary navigation">
-        <a className="brand" href="#top" onClick={closeMenu}>
+        <Link className="brand" href="/" onClick={closeMenu}>
           <BrandMark />
           <span>Kinemor</span>
-        </a>
+        </Link>
         <div className="nav-links nav-desktop">
           {navigationItems.map((item) => (
-            <a href={item.href} key={item.href}>{item.label}</a>
+            <Link aria-current={pathname === item.href ? "page" : undefined} href={item.href} key={item.href}>{item.label}</Link>
           ))}
         </div>
-        <a className="nav-cta nav-desktop" href="#contact">
-          Get in touch
-        </a>
         <button
           aria-controls="mobile-navigation"
           aria-expanded={isOpen}
@@ -54,9 +55,8 @@ export function Navigation() {
         {isOpen ? (
           <div className="mobile-menu" id="mobile-navigation">
             {navigationItems.map((item) => (
-              <a href={item.href} key={item.href} onClick={closeMenu}>{item.label}</a>
+              <Link aria-current={pathname === item.href ? "page" : undefined} href={item.href} key={item.href} onClick={closeMenu}>{item.label}</Link>
             ))}
-            <a href="#contact" onClick={closeMenu}>Get in touch</a>
           </div>
         ) : null}
       </nav>
