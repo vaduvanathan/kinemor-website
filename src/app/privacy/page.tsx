@@ -47,7 +47,7 @@ export default function PrivacyPage() {
         <article>
           <h2>Contact</h2>
           <p>
-            To ask about your submitted information, email <a href="mailto:contact@kinemor.com">contact@kinemor.com</a>.
+            To ask about your submitted information, email <a href="mailto:privacy@kinemor.com">privacy@kinemor.com</a>.
           </p>
         </article>
       </section>
