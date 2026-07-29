@@ -2369,7 +2369,6 @@ textarea {
 
 .aura-kine-hero,
 .aura-kine-overview,
-.aura-kine-console-section,
 .aura-kine-process,
 .aura-kine-research-links,
 .aura-kine-split-section,
@@ -2524,9 +2523,9 @@ textarea {
 
 .aura-kine-section-head {
   display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(300px, 1.1fr);
-  gap: clamp(36px, 7vw, 112px);
-  align-items: end;
+  gap: clamp(18px, 3vw, 30px);
+  align-items: start;
+  max-width: 1080px;
   padding-bottom: clamp(34px, 5vw, 64px);
 }
 
@@ -2535,12 +2534,12 @@ textarea {
 }
 
 .aura-kine-section-head h2 {
-  max-width: 880px;
+  max-width: 980px;
   margin: 0;
-  font-size: clamp(2.8rem, 4.9vw, 5.9rem);
+  font-size: clamp(2.7rem, 4.35vw, 5.25rem);
   font-weight: 520;
   letter-spacing: 0;
-  line-height: 0.93;
+  line-height: 0.95;
 }
 
 .aura-kine-overview-grid,
@@ -2588,30 +2587,75 @@ textarea {
 }
 
 .aura-kine-process-list {
-  border-top: 1px solid rgba(239, 238, 232, 0.14);
+  position: relative;
+  display: grid;
+  gap: 18px;
+  padding: 10px 0;
+}
+
+.aura-kine-process-list::before {
+  position: absolute;
+  top: 34px;
+  bottom: 34px;
+  left: 27px;
+  width: 1px;
+  background: linear-gradient(180deg, rgba(183, 255, 79, 0.42), rgba(239, 238, 232, 0.1));
+  content: "";
 }
 
 .aura-kine-process-row {
+  position: relative;
   display: grid;
-  grid-template-columns: 76px minmax(260px, 0.8fr) minmax(320px, 1fr);
-  gap: clamp(22px, 4vw, 64px);
+  grid-template-columns: 56px minmax(0, 1fr);
+  gap: clamp(20px, 3vw, 44px);
+  align-items: start;
+  min-height: 0;
+  padding: clamp(24px, 3vw, 34px);
+  border: 1px solid rgba(239, 238, 232, 0.12);
+  background: linear-gradient(90deg, rgba(239, 238, 232, 0.045), rgba(239, 238, 232, 0.018));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.045);
+  backdrop-filter: blur(12px);
+  transition: border-color 180ms ease, background-color 180ms ease, transform 180ms ease;
+}
+
+.aura-kine-process-row:hover {
+  border-color: rgba(183, 255, 79, 0.3);
+  background-color: rgba(183, 255, 79, 0.035);
+  transform: translateY(-2px);
+}
+
+.aura-kine-process-row > span {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  width: 56px;
+  height: 56px;
   align-items: center;
-  min-height: 132px;
-  border-bottom: 1px solid rgba(239, 238, 232, 0.14);
+  justify-content: center;
+  border: 1px solid rgba(183, 255, 79, 0.45);
+  background: rgba(7, 9, 8, 0.92);
+  box-shadow: 0 0 0 8px rgba(183, 255, 79, 0.045);
+}
+
+.aura-kine-process-row > div {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.58fr) minmax(320px, 0.84fr);
+  gap: clamp(24px, 4.5vw, 72px);
+  align-items: start;
 }
 
 .aura-kine-process-row h3 {
   margin: 0;
-  font-size: clamp(1.45rem, 2.3vw, 2.85rem);
+  font-size: clamp(1.58rem, 2vw, 2.28rem);
   font-weight: 540;
-  line-height: 1;
+  line-height: 1.05;
 }
 
 .aura-kine-process-row p {
   max-width: 620px;
   margin: 0;
-  color: rgba(239, 238, 232, 0.58);
-  font-size: 0.96rem;
+  color: rgba(239, 238, 232, 0.62);
+  font-size: clamp(0.98rem, 1vw, 1.08rem);
   line-height: 1.62;
 }
 
@@ -2640,11 +2684,12 @@ textarea {
   grid-template-columns: minmax(0, 1fr) 30px;
   gap: 24px;
   align-items: center;
-  min-height: 92px;
+  min-height: 84px;
   color: var(--ivory);
   cursor: pointer;
-  font-size: clamp(1.12rem, 1.7vw, 1.72rem);
+  font-size: clamp(1.12rem, 1.35vw, 1.36rem);
   font-weight: 620;
+  line-height: 1.24;
   list-style: none;
 }
 
@@ -2665,9 +2710,9 @@ textarea {
 
 .aura-kine-faq-item p {
   max-width: 820px;
-  margin: -4px 0 30px;
+  margin: -2px 0 30px;
   color: rgba(239, 238, 232, 0.6);
-  font-size: 1rem;
+  font-size: clamp(0.98rem, 1vw, 1.06rem);
   line-height: 1.65;
 }
 
@@ -3111,12 +3156,12 @@ textarea {
 }
 
 @media (max-width: 980px) {
-  .aura-kine-console { grid-template-columns: minmax(190px, 0.72fr) minmax(0, 1.3fr); }
-  .aura-kine-program-reader { grid-column: 1 / -1; border-top: 1px solid rgba(239, 238, 232, 0.11); }
-  .aura-kine-reader-image { min-height: 280px; }
-  .aura-kine-section-head,
-  .aura-kine-process-row {
+  .aura-kine-section-head {
     grid-template-columns: 1fr;
+  }
+  .aura-kine-process-row > div {
+    grid-template-columns: 1fr;
+    gap: 12px;
   }
   .aura-kine-overview-grid {
     grid-template-columns: 1fr;
@@ -3128,7 +3173,6 @@ textarea {
 @media (max-width: 760px) {
   .aura-kine-hero,
   .aura-kine-overview,
-  .aura-kine-console-section,
   .aura-kine-process,
   .aura-kine-research-links,
   .aura-kine-split-section,
@@ -3152,23 +3196,23 @@ textarea {
   .aura-kine-overview-card h3,
   .aura-kine-research-card h3,
   .aura-kine-research-card .aura-kine-reader-kicker { margin-top: 32px; }
-  .aura-kine-process-row {
-    min-height: 0;
-    gap: 14px;
-    padding: 25px 0;
+  .aura-kine-process-list::before {
+    left: 21px;
   }
-  .aura-kine-process-row h3 { font-size: clamp(1.55rem, 8vw, 2.45rem); }
+  .aura-kine-process-row {
+    grid-template-columns: 44px minmax(0, 1fr);
+    min-height: 0;
+    gap: 16px;
+    padding: 20px 18px;
+  }
+  .aura-kine-process-row > span {
+    width: 44px;
+    height: 44px;
+  }
+  .aura-kine-process-row h3 { font-size: clamp(1.38rem, 7vw, 1.9rem); }
+  .aura-kine-process-row p { font-size: 0.96rem; }
   .aura-kine-research-grid { grid-template-columns: 1fr; }
   .aura-kine-faq-item summary { min-height: 76px; font-size: 1.1rem; }
-  .aura-kine-menubar { padding: 0 10px; }
-  .aura-kine-menubar-right,
-  .aura-kine-menu-items { display: none; }
-  .aura-kine-console { display: block; min-height: 0; }
-  .aura-kine-console-sidebar { display: none; }
-  .aura-kine-program-list { border-right: 0; }
-  .aura-kine-program-reader { padding: 18px 14px 20px; border-top: 1px solid rgba(239, 238, 232, 0.11); }
-  .aura-kine-reader-image { min-height: 190px; }
-  .aura-kine-reader-summary { margin-top: 22px; }
   .aura-kine-split-section,
   .aura-kine-standards { gap: 42px; padding-bottom: 100px; }
   .aura-kine-split-copy h2,

@@ -1,55 +1,13 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
 import {
   ArrowUpRight,
-  BadgeCheck,
-  Camera,
   Check,
   ChevronRight,
-  CircleDot,
-  FileText,
-  FolderOpen,
-  Hand,
-  Layers3,
-  LockKeyhole,
-  MapPin,
-  ScanLine,
-  Search,
-  ShieldCheck,
-  Sparkles,
 } from "lucide-react";
-import { useState } from "react";
 import { DotField } from "@/components/dot-field";
-
-const programs = [
-  {
-    label: "DGlove1",
-    eyebrow: "RESEARCH / HAND INTERACTION",
-    title: "Contact-rich human hand data.",
-    body: "A research glove for recording pressure, contact, wrist motion, and task context while people handle real objects.",
-    image: "/images/dglove-palm.png",
-    href: "/glove",
-    status: "Prototype research",
-  },
-  {
-    label: "Open Worlds",
-    eyebrow: "FIELD SYSTEMS / REAL ENVIRONMENTS",
-    title: "Real work, with the context intact.",
-    body: "Permissioned capture programs for industrial spaces, operations, and the details robotics teams need to reuse data responsibly.",
-    image: "/images/kinemor-industrial-worlds.png",
-    href: "/open-worlds",
-    status: "Pilot programs",
-  },
-] as const;
-
-const programRows = [
-  { icon: Camera, label: "Visual capture", detail: "video + scene context", status: "Ready" },
-  { icon: Hand, label: "Contact research", detail: "DGlove1 signals", status: "Research" },
-  { icon: MapPin, label: "Site programs", detail: "permissioned places", status: "Planning" },
-] as const;
 
 const standards = [
   "Start with the real task, not a generic dataset.",
@@ -102,9 +60,7 @@ const faqs = [
  * into an explorable account of field capture, research, and robotics-ready data.
  */
 export function KinemorLanding() {
-  const [activeProgram, setActiveProgram] = useState(0);
   const reduceMotion = useReducedMotion();
-  const selected = programs[activeProgram];
 
   const rise = reduceMotion
     ? { initial: false as const, animate: { opacity: 1 } }
@@ -129,7 +85,7 @@ export function KinemorLanding() {
           <p className="aura-kine-hero-deck">Kinemor works directly with robotics teams to capture, organize, and deliver useful evidence from real work.</p>
           <div className="aura-kine-hero-actions">
             <Link className="aura-kine-primary-action" href="/contact">Plan a data program <ArrowUpRight aria-hidden="true" size={17} /></Link>
-            <Link className="aura-kine-text-action" href="#field-console">Explore the system <ChevronRight aria-hidden="true" size={17} /></Link>
+            <Link className="aura-kine-text-action" href="#capture-process">Explore the system <ChevronRight aria-hidden="true" size={17} /></Link>
           </div>
           <p className="aura-kine-hero-note">Research-led. Permissioned. Built around the task.</p>
         </div>
@@ -151,65 +107,7 @@ export function KinemorLanding() {
         </div>
       </section>
 
-      <section className="aura-kine-console-section" id="field-console" aria-labelledby="field-console-title">
-        <motion.div {...rise} className="aura-kine-section-head aura-kine-section-head-compact">
-          <p className="aura-kine-kicker"><span /> 02 Data programs</p>
-          <h2>Choose the program around the evidence your robot needs.</h2>
-        </motion.div>
-        <motion.div {...rise} className="aura-kine-menubar">
-          <div className="aura-kine-menubar-left"><span className="traffic traffic-red" /><span className="traffic traffic-yellow" /><span className="traffic traffic-green" /><strong>Kinemor</strong><span className="aura-kine-menu-items">Field&nbsp;&nbsp; Capture&nbsp;&nbsp; Review&nbsp;&nbsp; Delivery</span></div>
-          <div className="aura-kine-menubar-right"><Search aria-hidden="true" size={14} /> Field Console / 01</div>
-        </motion.div>
-        <motion.div {...rise} transition={{ duration: 0.78, delay: 0.08, ease: [0.22, 1, 0.36, 1] }} className="aura-kine-console">
-          <aside className="aura-kine-console-sidebar">
-            <span className="aura-kine-console-caption">Kinemor systems</span>
-            <Link className="aura-kine-console-create" href="/contact"><Sparkles aria-hidden="true" size={15} /> Start a program</Link>
-            <div className="aura-kine-console-nav" aria-label="Field console views">
-              <button className="is-active" type="button"><Layers3 aria-hidden="true" size={16} /> Programs <span>02</span></button>
-              <button type="button"><FolderOpen aria-hidden="true" size={16} /> Evidence</button>
-              <button type="button"><ScanLine aria-hidden="true" size={16} /> Review queue</button>
-              <button type="button"><ShieldCheck aria-hidden="true" size={16} /> Privacy plan</button>
-            </div>
-            <div className="aura-kine-console-status"><CircleDot aria-hidden="true" size={14} /><span>Systems designed around the work.</span></div>
-          </aside>
-
-          <div className="aura-kine-program-list">
-            <div className="aura-kine-console-search"><Search aria-hidden="true" size={15} /> Browse Kinemor programs</div>
-            {programs.map((program, index) => (
-              <button
-                aria-pressed={activeProgram === index}
-                className={`aura-kine-program-row ${activeProgram === index ? "is-selected" : ""}`}
-                key={program.label}
-                onClick={() => setActiveProgram(index)}
-                type="button"
-              >
-                <span className="aura-kine-program-dot" />
-                <span><strong>{program.label}</strong><small>{program.eyebrow}</small></span>
-                <em>{program.status}</em>
-              </button>
-            ))}
-            <div className="aura-kine-list-label">Capture stack</div>
-            {programRows.map(({ icon: Icon, label, detail, status }) => (
-              <div className="aura-kine-stack-row" key={label}><Icon aria-hidden="true" size={15} /><span><strong>{label}</strong><small>{detail}</small></span><em>{status}</em></div>
-            ))}
-          </div>
-
-          <article className="aura-kine-program-reader">
-            <div className="aura-kine-reader-toolbar"><span><FileText aria-hidden="true" size={15} /> Program brief</span><span><LockKeyhole aria-hidden="true" size={15} /> Permission-first</span></div>
-            <div className="aura-kine-reader-image">
-              <Image alt="" fill priority sizes="(max-width: 960px) 100vw, 42vw" src={selected.image} />
-              <span>{selected.label}</span>
-            </div>
-            <p className="aura-kine-reader-kicker">{selected.eyebrow}</p>
-            <h2 id="field-console-title">{selected.title}</h2>
-            <p>{selected.body}</p>
-            <div className="aura-kine-reader-summary"><BadgeCheck aria-hidden="true" size={17} /><span><strong>Designed for useful context</strong> Capture plans include the task, place, people policy, and the data format a team can actually use.</span></div>
-            <Link className="aura-kine-reader-link" href={selected.href}>View {selected.label} <ArrowUpRight aria-hidden="true" size={16} /></Link>
-          </article>
-        </motion.div>
-      </section>
-
-      <section className="aura-kine-process" aria-labelledby="capture-process-title">
+      <section className="aura-kine-process" id="capture-process" aria-labelledby="capture-process-title">
         <motion.div {...rise} className="aura-kine-section-head">
           <p className="aura-kine-kicker"><span /> 03 How a capture program works</p>
           <h2 id="capture-process-title">A clear path from robot task to structured dataset.</h2>
@@ -218,8 +116,10 @@ export function KinemorLanding() {
           {captureSteps.map(([code, title, body], index) => (
             <motion.article {...rise} transition={{ duration: 0.72, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }} className="aura-kine-process-row" key={title}>
               <span>{code}</span>
-              <h3>{title}</h3>
-              <p>{body}</p>
+              <div>
+                <h3>{title}</h3>
+                <p>{body}</p>
+              </div>
             </motion.article>
           ))}
         </div>
