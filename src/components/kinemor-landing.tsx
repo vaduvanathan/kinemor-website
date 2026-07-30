@@ -30,6 +30,13 @@ const captureSteps = [
   ["05", "Deliver structured datasets", "Send files, metadata, review notes, and dataset structure in a form robotics teams can work with."],
 ] as const;
 
+const heroWorkflow = [
+  ["Task", "Target behavior and environment"],
+  ["Capture", "Video, sensors, operators, timing"],
+  ["Review", "Privacy, quality, and rights"],
+  ["Deliver", "Files, metadata, review notes"],
+] as const;
+
 const researchCards = [
   {
     code: "04",
@@ -62,7 +69,7 @@ const faqs = [
 export function KinemorLanding() {
   const reduceMotion = useReducedMotion();
 
-  const rise = reduceMotion
+  const stepReveal = reduceMotion
     ? { initial: false as const, animate: { opacity: 1 } }
     : { initial: { opacity: 0, y: 22 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true, amount: 0.2 } };
 
@@ -89,34 +96,45 @@ export function KinemorLanding() {
           </div>
           <p className="aura-kine-hero-note">Research-led. Permissioned. Built around the task.</p>
         </div>
+        <aside className="aura-kine-hero-panel" aria-label="Kinemor program workflow">
+          <p>Program map</p>
+          {heroWorkflow.map(([title, body], index) => (
+            <div className="aura-kine-hero-panel-row" key={title}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <div>
+                <strong>{title}</strong>
+                <small>{body}</small>
+              </div>
+            </div>
+          ))}
+        </aside>
       </section>
 
       <section className="aura-kine-overview" aria-labelledby="what-kinemor-does-title">
-        <motion.div {...rise} className="aura-kine-section-head">
-          <p className="aura-kine-kicker"><span /> 01 What Kinemor does</p>
+        <div className="aura-kine-section-head">
           <h2 id="what-kinemor-does-title">We turn real work into evidence robots can learn from.</h2>
-        </motion.div>
+        </div>
         <div className="aura-kine-overview-grid">
-          {operatingNotes.map(([code, title, body], index) => (
-            <motion.article {...rise} transition={{ duration: 0.72, delay: index * 0.06, ease: [0.22, 1, 0.36, 1] }} className="aura-kine-overview-card" key={title}>
+          {operatingNotes.map(([code, title, body]) => (
+            <article className="aura-kine-overview-card" key={title}>
               <span>{code}</span>
               <h3>{title}</h3>
               <p>{body}</p>
-            </motion.article>
+            </article>
           ))}
         </div>
       </section>
 
       <section className="aura-kine-process" id="capture-process" aria-labelledby="capture-process-title">
-        <motion.div {...rise} className="aura-kine-section-head">
-          <p className="aura-kine-kicker"><span /> 03 How a capture program works</p>
+        <div className="aura-kine-section-head">
+          <p className="aura-kine-kicker"><span /> How a capture program works</p>
           <h2 id="capture-process-title">A clear path from robot task to structured dataset.</h2>
-        </motion.div>
+        </div>
         <div className="aura-kine-process-list">
           {captureSteps.map(([code, title, body], index) => (
-            <motion.article {...rise} transition={{ duration: 0.72, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }} className="aura-kine-process-row" key={title}>
-              <span>{code}</span>
-              <div>
+            <motion.article {...stepReveal} transition={{ duration: 0.72, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }} className="aura-kine-process-row" key={title}>
+              <span key="code">{code}</span>
+              <div key="copy">
                 <h3>{title}</h3>
                 <p>{body}</p>
               </div>
@@ -126,31 +144,29 @@ export function KinemorLanding() {
       </section>
 
       <section className="aura-kine-research-links" aria-labelledby="research-links-title">
-        <motion.div {...rise} className="aura-kine-section-head">
-          <p className="aura-kine-kicker"><span /> 04 Research and field systems</p>
+        <div className="aura-kine-section-head">
           <h2 id="research-links-title">Two active directions for physical AI data.</h2>
-        </motion.div>
+        </div>
         <div className="aura-kine-research-grid">
-          {researchCards.map((card, index) => (
-            <motion.article {...rise} transition={{ duration: 0.76, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }} className="aura-kine-research-card" key={card.title}>
+          {researchCards.map((card) => (
+            <article className="aura-kine-research-card" key={card.title}>
               <span>{card.code}</span>
               <p className="aura-kine-reader-kicker">{card.eyebrow}</p>
               <h3>{card.title}</h3>
               <p>{card.body}</p>
               <Link className="aura-kine-reader-link" href={card.href}>Open page <ArrowUpRight aria-hidden="true" size={16} /></Link>
-            </motion.article>
+            </article>
           ))}
         </div>
       </section>
 
       <section className="aura-kine-split-section" aria-labelledby="quality-title">
-        <motion.div {...rise} className="aura-kine-split-copy">
-          <p className="aura-kine-kicker"><span /> Quality before volume</p>
+        <div className="aura-kine-split-copy">
           <h2 id="quality-title">Make every hour of capture count.</h2>
           <p>Robots learn from the details around an action. We make the purpose, place, permissions, and useful signals part of the data program from the beginning.</p>
           <div className="aura-kine-chip-row"><span>Task context</span><span>Site permission</span><span>Privacy review</span><span>Dataset structure</span></div>
-        </motion.div>
-        <motion.div {...rise} transition={{ duration: 0.76, delay: 0.08, ease: [0.22, 1, 0.36, 1] }} className="aura-kine-glass-stack">
+        </div>
+        <div className="aura-kine-glass-stack">
           <p>FIELD REVIEW / TODAY</p>
           {[
             ["Intent", "Task, environment, and target behaviors"],
@@ -158,24 +174,22 @@ export function KinemorLanding() {
             ["Protection", "Privacy plan, rights, and sensitive-data handling"],
             ["Delivery", "Files, metadata, and reviewable evidence"],
           ].map(([title, detail], index) => <div className="aura-kine-glass-row" key={title}><span>0{index + 1}</span><div><strong>{title}</strong><small>{detail}</small></div><Check aria-hidden="true" size={17} /></div>)}
-        </motion.div>
+        </div>
       </section>
 
       <section className="aura-kine-standards" aria-labelledby="standards-title">
-        <motion.div {...rise}>
-          <p className="aura-kine-kicker"><span /> 06 Standards</p>
+        <div>
           <h2 id="standards-title">Data is only useful when people can trust how it was made.</h2>
-        </motion.div>
+        </div>
         <div className="aura-kine-standard-list">
           {standards.map((standard) => <p key={standard}><Check aria-hidden="true" size={17} /> {standard}</p>)}
         </div>
       </section>
 
       <section className="aura-kine-faq" aria-labelledby="faq-title">
-        <motion.div {...rise} className="aura-kine-section-head">
-          <p className="aura-kine-kicker"><span /> 07 FAQ</p>
+        <div className="aura-kine-section-head">
           <h2 id="faq-title">Questions robotics teams usually ask first.</h2>
-        </motion.div>
+        </div>
         <div className="aura-kine-faq-list">
           {faqs.map(([question, answer]) => (
             <details className="aura-kine-faq-item" key={question}>
@@ -187,12 +201,11 @@ export function KinemorLanding() {
       </section>
 
       <section className="aura-kine-cta" aria-labelledby="cta-title">
-        <motion.div {...rise} className="aura-kine-cta-glass">
-          <p className="aura-kine-kicker"><span /> 08 Contact</p>
+        <div className="aura-kine-cta-glass">
           <h2 id="cta-title">Tell us what your robot needs to learn.</h2>
           <p>Share the task, environment, and kind of evidence you need. We will reply to the address you provide.</p>
           <div className="aura-kine-cta-actions"><Link className="aura-kine-primary-action" href="/contact">Start a conversation <ArrowUpRight aria-hidden="true" size={17} /></Link><Link className="aura-kine-secondary-action" href="/glove">Explore DGlove1 <ChevronRight aria-hidden="true" size={17} /></Link></div>
-        </motion.div>
+        </div>
       </section>
     </div>
   );
