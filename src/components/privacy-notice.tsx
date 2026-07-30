@@ -1,23 +1,40 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 
 const noticeKey = "kinemor_privacy_notice_seen";
 
+function subscribePrivacyStore(onStoreChange: () => void) {
+  window.addEventListener("storage", onStoreChange);
+  return () => window.removeEventListener("storage", onStoreChange);
+}
+
+function getPrivacySnapshot() {
+  try {
+    return window.localStorage.getItem(noticeKey) === "true";
+  } catch {
+    return true;
+  }
+}
+
+function getServerPrivacySnapshot() {
+  return true;
+}
+
 /** Shows a compact privacy notice without adding tracking cookies. */
 export function PrivacyNotice() {
-  const [isVisible, setIsVisible] = useState(() => {
-    if (typeof window === "undefined") {
-      return false;
-    }
-
-    return window.localStorage.getItem(noticeKey) !== "true";
-  });
+  const wasAccepted = useSyncExternalStore(subscribePrivacyStore, getPrivacySnapshot, getServerPrivacySnapshot);
+  const [dismissedNow, setDismissedNow] = useState(false);
+  const isVisible = !wasAccepted && !dismissedNow;
 
   function acceptNotice() {
-    window.localStorage.setItem(noticeKey, "true");
-    setIsVisible(false);
+    try {
+      window.localStorage.setItem(noticeKey, "true");
+    } catch {
+      // Keep the notice dismissible even when localStorage is blocked.
+    }
+    setDismissedNow(true);
   }
 
   if (!isVisible) {

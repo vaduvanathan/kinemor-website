@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
+import { useEffect, useRef, useState } from "react";
 import {
   ArrowUpRight,
   Check,
@@ -28,13 +29,6 @@ const captureSteps = [
   ["03", "Collect real-world data", "Run permissioned capture in the actual environment with checks for coverage, quality, and context."],
   ["04", "Review privacy and quality", "Screen the data for sensitive details, missing context, weak samples, and unusable recordings."],
   ["05", "Deliver structured datasets", "Send files, metadata, review notes, and dataset structure in a form robotics teams can work with."],
-] as const;
-
-const heroWorkflow = [
-  ["Task", "Target behavior and environment"],
-  ["Capture", "Video, sensors, operators, timing"],
-  ["Review", "Privacy, quality, and rights"],
-  ["Deliver", "Files, metadata, review notes"],
 ] as const;
 
 const researchCards = [
@@ -68,6 +62,29 @@ const faqs = [
  */
 export function KinemorLanding() {
   const reduceMotion = useReducedMotion();
+  const [activeStep, setActiveStep] = useState(0);
+  const stepRefs = useRef<Array<HTMLElement | null>>([]);
+
+  useEffect(() => {
+    const entries = stepRefs.current.filter((step): step is HTMLElement => step !== null);
+    if (!entries.length || reduceMotion) return undefined;
+
+    const observer = new IntersectionObserver(
+      (observations) => {
+        const current = observations
+          .filter((observation) => observation.isIntersecting)
+          .sort((left, right) => right.intersectionRatio - left.intersectionRatio)[0];
+
+        if (current) {
+          setActiveStep(Number(current.target.getAttribute("data-step")));
+        }
+      },
+      { rootMargin: "-24% 0px -32% 0px", threshold: [0.2, 0.5, 0.75] },
+    );
+
+    entries.forEach((step) => observer.observe(step));
+    return () => observer.disconnect();
+  }, [reduceMotion]);
 
   const stepReveal = reduceMotion
     ? { initial: false as const, animate: { opacity: 1 } }
@@ -96,22 +113,11 @@ export function KinemorLanding() {
           </div>
           <p className="aura-kine-hero-note">Research-led. Permissioned. Built around the task.</p>
         </div>
-        <aside className="aura-kine-hero-panel" aria-label="Kinemor program workflow">
-          <p>Program map</p>
-          {heroWorkflow.map(([title, body], index) => (
-            <div className="aura-kine-hero-panel-row" key={title}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <div>
-                <strong>{title}</strong>
-                <small>{body}</small>
-              </div>
-            </div>
-          ))}
-        </aside>
       </section>
 
       <section className="aura-kine-overview" aria-labelledby="what-kinemor-does-title">
         <div className="aura-kine-section-head">
+          <p className="aura-kine-kicker"><span /> What Kinemor does</p>
           <h2 id="what-kinemor-does-title">We turn real work into evidence robots can learn from.</h2>
         </div>
         <div className="aura-kine-overview-grid">
@@ -125,6 +131,24 @@ export function KinemorLanding() {
         </div>
       </section>
 
+      <section className="aura-kine-split-section" aria-labelledby="program-title">
+        <div className="aura-kine-split-copy">
+          <p className="aura-kine-kicker"><span /> Data programs</p>
+          <h2 id="program-title">A capture program is more than a camera.</h2>
+          <p>We define the task, place, people policy, hardware, timing, and review rules together. That gives the data a useful purpose before collection begins.</p>
+          <div className="aura-kine-chip-row"><span>Task context</span><span>Site permission</span><span>Privacy review</span><span>Dataset structure</span></div>
+        </div>
+        <div className="aura-kine-glass-stack" aria-label="Elements of a Kinemor data program">
+          <p>PROGRAM PACKET / 01</p>
+          {[
+            ["Intent", "Target behavior and environment"],
+            ["Capture", "Cameras, sensors, operators, and timing"],
+            ["Review", "Quality signals, privacy, and usage rights"],
+            ["Delivery", "Files, metadata, and review notes"],
+          ].map(([title, detail], index) => <div className="aura-kine-glass-row" key={title}><span>0{index + 1}</span><div><strong>{title}</strong><small>{detail}</small></div><Check aria-hidden="true" size={17} /></div>)}
+        </div>
+      </section>
+
       <section className="aura-kine-process" id="capture-process" aria-labelledby="capture-process-title">
         <div className="aura-kine-section-head">
           <p className="aura-kine-kicker"><span /> How a capture program works</p>
@@ -132,7 +156,15 @@ export function KinemorLanding() {
         </div>
         <div className="aura-kine-process-list">
           {captureSteps.map(([code, title, body], index) => (
-            <motion.article {...stepReveal} transition={{ duration: 0.72, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }} className="aura-kine-process-row" key={title}>
+            <motion.article
+              {...stepReveal}
+              aria-current={activeStep === index ? "step" : undefined}
+              className={`aura-kine-process-row${activeStep === index ? " is-active" : ""}`}
+              data-step={index}
+              key={title}
+              ref={(element) => { stepRefs.current[index] = element; }}
+              transition={{ duration: 0.72, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
+            >
               <span key="code">{code}</span>
               <div key="copy">
                 <h3>{title}</h3>
@@ -145,6 +177,7 @@ export function KinemorLanding() {
 
       <section className="aura-kine-research-links" aria-labelledby="research-links-title">
         <div className="aura-kine-section-head">
+          <p className="aura-kine-kicker"><span /> Research tracks</p>
           <h2 id="research-links-title">Two active directions for physical AI data.</h2>
         </div>
         <div className="aura-kine-research-grid">
@@ -157,23 +190,6 @@ export function KinemorLanding() {
               <Link className="aura-kine-reader-link" href={card.href}>Open page <ArrowUpRight aria-hidden="true" size={16} /></Link>
             </article>
           ))}
-        </div>
-      </section>
-
-      <section className="aura-kine-split-section" aria-labelledby="quality-title">
-        <div className="aura-kine-split-copy">
-          <h2 id="quality-title">Make every hour of capture count.</h2>
-          <p>Robots learn from the details around an action. We make the purpose, place, permissions, and useful signals part of the data program from the beginning.</p>
-          <div className="aura-kine-chip-row"><span>Task context</span><span>Site permission</span><span>Privacy review</span><span>Dataset structure</span></div>
-        </div>
-        <div className="aura-kine-glass-stack">
-          <p>FIELD REVIEW / TODAY</p>
-          {[
-            ["Intent", "Task, environment, and target behaviors"],
-            ["Capture", "Cameras, sensors, operators, and quality gates"],
-            ["Protection", "Privacy plan, rights, and sensitive-data handling"],
-            ["Delivery", "Files, metadata, and reviewable evidence"],
-          ].map(([title, detail], index) => <div className="aura-kine-glass-row" key={title}><span>0{index + 1}</span><div><strong>{title}</strong><small>{detail}</small></div><Check aria-hidden="true" size={17} /></div>)}
         </div>
       </section>
 
