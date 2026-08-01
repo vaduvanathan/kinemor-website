@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { track } from "@vercel/analytics/react";
 import { motion, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import {
@@ -108,8 +109,20 @@ export function KinemorLanding() {
           <h1 id="aura-kine-title">The physical world.<br /><span>Structured for robots.</span></h1>
           <p className="aura-kine-hero-deck">Kinemor works directly with robotics teams to capture, organize, and deliver useful evidence from real work.</p>
           <div className="aura-kine-hero-actions">
-            <Link className="aura-kine-primary-action" href="/contact">Plan a data program <ArrowUpRight aria-hidden="true" size={17} /></Link>
-            <Link className="aura-kine-text-action" href="#capture-process">Explore the system <ChevronRight aria-hidden="true" size={17} /></Link>
+            <Link
+              className="aura-kine-primary-action"
+              href="/contact"
+              onClick={() => track("hero_cta_click", { label: "Plan a data program", target: "/contact" })}
+            >
+              Plan a data program <ArrowUpRight aria-hidden="true" size={17} />
+            </Link>
+            <Link
+              className="aura-kine-text-action"
+              href="#capture-process"
+              onClick={() => track("hero_cta_click", { label: "Explore the system", target: "#capture-process" })}
+            >
+              Explore the system <ChevronRight aria-hidden="true" size={17} />
+            </Link>
           </div>
           <p className="aura-kine-hero-note">Research-led. Permissioned. Built around the task.</p>
         </div>

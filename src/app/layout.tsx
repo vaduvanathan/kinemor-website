@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Azeret_Mono, Space_Grotesk } from "next/font/google";
 import { PageTransition } from "@/components/page-transition";
 import { PrivacyNotice } from "@/components/privacy-notice";
+import { SiteTelemetry } from "@/components/site-telemetry";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -50,6 +53,9 @@ export default function RootLayout({
       <body>
         <PageTransition>{children}</PageTransition>
         <PrivacyNotice />
+        <SiteTelemetry />
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

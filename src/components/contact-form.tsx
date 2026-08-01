@@ -1,13 +1,24 @@
 "use client";
 
+import { track } from "@vercel/analytics/react";
 import { ArrowUpRight, Check } from "lucide-react";
-import { FormEvent, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 
 type SubmissionState = "idle" | "sending" | "success" | "error";
 
 export function ContactForm() {
   const [status, setStatus] = useState<SubmissionState>("idle");
   const [message, setMessage] = useState("");
+  const hasTrackedFormStart = useRef(false);
+
+  function trackFormStart() {
+    if (hasTrackedFormStart.current) {
+      return;
+    }
+
+    hasTrackedFormStart.current = true;
+    track("contact_form_start");
+  }
 
   async function submitContact(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -30,6 +41,7 @@ export function ContactForm() {
       }
 
       form.reset();
+      track("contact_form_submit", { inquiry_type: String(payload.inquiryType || "unknown") });
       setStatus("success");
       setMessage(result.message || "Thanks. Your message is on its way.");
     } catch (error) {
@@ -39,7 +51,7 @@ export function ContactForm() {
   }
 
   return (
-    <form className="contact-form" onSubmit={submitContact} aria-busy={status === "sending"}>
+    <form className="contact-form" onFocusCapture={trackFormStart} onSubmit={submitContact} aria-busy={status === "sending"}>
       <div className="contact-form-intro">
         <div>
           <p className="contact-form-code">KNR / INQUIRY_01</p>
